@@ -62,7 +62,7 @@ class AppFixtures extends Fixture
 
             $post = new Post();
             $post->setTitle($faker->sentence());
-            $post->setBody($faker->text(300));
+            $post->setBody($faker->text(1000));
             $post->setPublishedAt(new DateTime());
             $post->setAuthor($userList[mt_rand(0, count($userList) - 1)]);
 
@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
         for($o = 1; $o <=15 ; $o++) {
             $comment = new Comment();
             $comment->setUsername($faker->userName());
-            $comment->setBody($faker->text(150));
+            $comment->setBody($faker->text(400));
             $comment->setPublishedAt(new DateTime());
             $comment->setIsValidated(false);
             $comment->setIsRefused(false);

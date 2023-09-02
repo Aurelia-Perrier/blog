@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
+use App\Repository\PostRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -11,32 +13,17 @@ class MainController extends AbstractController
      *
      * @Route ("/", name="app_home")
      */
-    public function index()
+    public function index(PostRepository $postRepository)
     {
-        return $this->render('main.html.twig', []);
+        $lastPosts = $postRepository->findBy([], ['publishedAt' => 'DESC'], 4);
+        return $this->render('main.html.twig', [
+            'lastPosts' => $lastPosts,
+        ]);
     }
 
     /**
      *
-     * @Route ("/post", name="app_single_post")
-     */
-    public function post()
-    {
-        return $this->render('post.html.twig', []);
-    }
-
-     /**
-     *
-     * @Route ("/posts", name="app_posts")
-     */
-    public function posts()
-    {
-        return $this->render('posts.html.twig', []);
-    }
-
-    /**
-     *
-     * @Route ("/contact", name="app_contatc")
+     * @Route ("/contact", name="app_contact")
      */
     public function contatc()
     {
