@@ -27,7 +27,7 @@ class MainController extends AbstractController
 
      /**
      *
-     * @Route ("/posts", name="app_single_post")
+     * @Route ("/posts", name="app_posts")
      */
     public function posts()
     {
