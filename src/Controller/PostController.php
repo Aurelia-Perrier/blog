@@ -10,25 +10,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PostController extends AbstractController {
 
     /**
-     *
-     * @Route ("/post", name="app_single_post")
-     */
-    public function post()
-    {
-        return $this->render('post.html.twig', []);
-    }
+    *
+    * @Route ("/posts", name="app_posts")
+    */
+   public function posts(PostRepository $postRepository, CategoryRepository $categoryRepository)
+   {
+       $posts = $postRepository->findAll();
+       $categories =$categoryRepository->findAll();
+       return $this->render('posts.html.twig', [
+           'posts' => $posts,
+           'categories' => $categories,
+       ]);
+   }
 
-     /**
+    /**
      *
-     * @Route ("/posts", name="app_posts")
+     * @Route ("/post/{id}", name="app_single_post", requirements={"id"="\d+"})
      */
-    public function posts(PostRepository $postRepository, CategoryRepository $categoryRepository)
+    public function post(PostRepository $postRepository, $id)
     {
-        $posts = $postRepository->findAll();
-        $categories =$categoryRepository->findAll();
-        return $this->render('posts.html.twig', [
-            'posts' => $posts,
-            'categories' => $categories,
+        $post = $postRepository->findOneBy(['id' => $id]);
+        return $this->render('post.html.twig', [
+            'post' => $post
         ]);
     }
+
 }

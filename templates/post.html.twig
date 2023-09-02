@@ -6,44 +6,24 @@
 				<header class="mb-4 lg:mb-6 not-format">
 					<address class="flex items-center mb-6 not-italic">
 						<div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-							<img class="mr-4 w-16 h-16 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Jese Leos">
+							<img class="mr-4 w-16 h-16 rounded-full" src={{post.author.profilPicture}} alt="Jese Leos">
 							<div>
-								<a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">Jese Leos</a>
-								<p class="text-base font-light text-gray-500 dark:text-gray-400">Graphic Designer, educator & CEO Flowbite</p>
+								<a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">{{post.author.firstname}}
+									{{post.author.lastname}}</a>
 								<p class="text-base font-light text-gray-500 dark:text-gray-400">
-									<time pubdate datetime="2022-02-08" title="February 8th, 2022">Feb. 8, 2022</time>
+									<time pubdate datetime="2022-02-08" title="February 8th, 2022">{{ post.publishedAt|date("d/m/Y")}}</time>
 								</p>
 							</div>
 						</div>
 					</address>
-					<h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">Best practices for successful prototypes</h1>
+					<h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{post.title}}</h1>
 				</header>
 				<div class="my-4">
 					<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">Badge link</a>
 					<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">Badge link</a>
 					<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">Badge link</a>
 				</div>
-				<h3>Best practices for setting up your prototype</h3>
-				<p>
-					<strong>Low fidelity or high fidelity?</strong>
-					Fidelity refers to how close a prototype will be to
-																									              the real deal. If you’re simply preparing a quick visual aid for a presentation, a low-fidelity
-																									              prototype — like a wireframe with placeholder images and some basic text — would be more than
-																									              enough. But if you’re going for more intricate usability testing, a high-fidelity prototype — with
-																									              on-brand colors, fonts and imagery — could help get more pointed results.</p>
-				<p>
-					<strong>Consider your user</strong>. To create an intuitive user flow, try to think as your user
-																														              would when interacting with your product. While you can fine-tune this during beta testing,
-																														              considering your user’s needs and habits early on will save you time by setting you on the right
-																														              path.</p>
-				<p>
-					<strong>Start from the inside out</strong>. A nice way to both organize your tasks and create more
-																														              user-friendly prototypes is by building your prototypes ‘inside out’. Start by focusing on what will
-																														              be important to your user, like a Buy now button or an image gallery, and list each element by order
-																														              of priority. This way, you’ll be able to create a prototype that puts your users’ needs at the heart
-																														              of your design.</p>
-				<p>And there you have it! Everything you need to design and share prototypes — right in Flowbite Figma.
-				</p>
+				<p>{{post.body}}</p>
 				<section class="not-format">
 					<div class="flex justify-between items-center mb-6">
 						<h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
@@ -71,34 +51,36 @@
 						<p class="ml-auto text-xs text-gray-500 dark:text-gray-400">Remember, contributions to this topic should follow our
 							<a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Community Guidelines</a>.</p>
 
-						<article class="p-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-							<footer class="flex justify-between items-center mb-2">
-								<div class="flex items-center">
-									<p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white"><img class="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-4.jpg" alt="Helene Engels">Helene Engels</p>
-									<p class="text-sm text-gray-600 dark:text-gray-400">
-										<time pubdate datetime="2022-06-23" title="June 23rd, 2022">Jun. 23, 2022</time>
-									</p>
-								</div>
-								<button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
-									<svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-										<path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-									</svg>
-								</button>
-								<!-- Dropdown menu -->
-								<div id="dropdownComment4" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-									<ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
-										<li>
-											<a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Valider</a>
-										</li>
-										<li>
-											<a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Refuser</a>
-										</li>
-									</ul>
-								</div>
-							</footer>
-							<p>Thanks for sharing this. I do came from the Backend development and explored some of the tools to design my Side Projects.</p>
-							<div class="flex items-center mt-4 space-x-4"></div>
-						</article>
+						{% for comment in post.comments %}
+							<article class="p-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+								<footer class="flex justify-between items-center mb-2">
+									<div class="flex items-center">
+										<p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">{{comment.username|upper }}</p>
+										<p class="text-sm text-gray-600 dark:text-gray-400">
+											<time pubdate datetime="2022-06-23" title="June 23rd, 2022">{{ comment.publishedAt|date("d/m/Y")}}</time>
+										</p>
+									</div>
+									<button id="dropdownComment4Button" data-dropdown-toggle="dropdownComment4" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+										<svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+											<path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+										</svg>
+									</button>
+									<!-- Dropdown menu -->
+									<div id="dropdownComment4" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+										<ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+											<li>
+												<a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Valider</a>
+											</li>
+											<li>
+												<a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Refuser</a>
+											</li>
+										</ul>
+									</div>
+								</footer>
+								<p>{{comment.body}}</p>
+								<div class="flex items-center mt-4 space-x-4"></div>
+							</article>
+						{% endfor %}
 					</section>
 				</article>
 			</div>
