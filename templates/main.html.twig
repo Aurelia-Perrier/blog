@@ -3,49 +3,27 @@
 	<section class="bg-white dark:bg-gray-900 mt-6">
 		<div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
 			<div class="max-w-screen-md mb-8 lg:mb-16">
-				<h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed for business teams like yours</h2>
-				<p class="text-gray-500 sm:text-xl dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+				<h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Bienvenue sur notre site</h2>
+				<p class="text-gray-500 sm:text-xl dark:text-gray-400">Découvrez nos derniers actualités sur le monde du dev </p>
 			</div>
 			<div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-2 md:gap-12 md:space-y-0">
-				<div class="border-line">
-					<div class="mb-4">
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
+				{% for post in lastPosts %}
+					<div class="border-line">
+						<div class="mb-4">
+						{% for category in post.category %}
+							<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">{{category.name}}</a>
+						{% endfor %}
+						</div>
+						<h3 class="mb-2 text-xl font-bold dark:text-white">{{ post.title }}</h3>
+						<p class="text-gray-500 dark:text-gray-400">{{post.body|u.truncate(200, '...', false)}}</p>
+						<a href="#" class="inline-flex items-center px-3 py-2 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+						Read more
+						<svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+						</svg>
+					</a>
 					</div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
-					<p class="text-gray-500 dark:text-gray-400">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month with our marketing plan.</p>
-				</div>
-				<div>
-					<div>
-					<div class="mb-4">
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-					</div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
-					<p class="text-gray-500 dark:text-gray-400">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month with our marketing plan.</p>
-				</div>
-				</div>
-				<div>
-					<div class="mb-4">
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-					</div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
-					<p class="text-gray-500 dark:text-gray-400">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month with our marketing plan.</p>
-				</div>
-				<div>
-					<div class="mb-4">
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-						<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">Badge link</a>
-					</div>
-					<h3 class="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
-					<p class="text-gray-500 dark:text-gray-400">Plan it, create it, launch it. Collaborate seamlessly with all  the organization and hit your marketing goals every month with our marketing plan.</p>
-
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>
