@@ -64,6 +64,8 @@ class PostController extends AbstractController {
             $post->setAuthor($user);
             $postRepository->add($post, true);
 
+            $this->addFlash('success', 'Le poste est en ligne ! Merci pour votre contribution ');
+
 
             // redirection
             return $this->redirectToRoute('app_posts', [], Response::HTTP_SEE_OTHER);
