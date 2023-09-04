@@ -13,8 +13,9 @@ module.exports = {
     },
   },
   plugins: [
+    require('@tailwindcss/forms'),
     require('flowbite/plugin'), // add the flowbite plugin
-    require('flowbite-typography')
+    require('flowbite-typography'),
   ],
 }
 
