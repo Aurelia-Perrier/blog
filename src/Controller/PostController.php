@@ -20,7 +20,7 @@ class PostController extends AbstractController {
     */
    public function posts(PostRepository $postRepository, CategoryRepository $categoryRepository)
    {
-       $posts = $postRepository->findAll();
+       $posts = $postRepository->findBy([], ['publishedAt' => 'DESC']);
        $categories =$categoryRepository->findAll();
        return $this->render('post/posts.html.twig', [
            'posts' => $posts,
