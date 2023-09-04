@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Repository\CategoryRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,6 +48,8 @@ class PostController extends AbstractController {
      */
     public function new(Request $request, PostRepository $postRepository)
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         $post = new Post();
 
         $form = $this->createForm(PostType::class, $post);
@@ -55,6 +58,10 @@ class PostController extends AbstractController {
         // if form is submitted
         if ($form->isSubmitted() && $form->isValid()) {
 
+             /** @var \App\Entity\User $user */
+             $user = $this->getUser();
+            $post->setPublishedAt(new DateTime());
+            $post->setAuthor($user);
             $postRepository->add($post, true);
 
 
