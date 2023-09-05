@@ -23,7 +23,6 @@ class PostController extends AbstractController
     {
 
         $categoryId = $request->request->get('category');
-        dump($categoryId);
 
         if (isset($categoryId) && $categoryId != 0) {
 
@@ -33,11 +32,11 @@ class PostController extends AbstractController
 
             foreach ($postsToSort as $post) {
 
-                $uniquePosts = $post->getCategory()->getValues();
+                $postCategory = $post->getCategory()->getValues();
 
-                foreach ($uniquePosts as $uniquePost) {
+                foreach ($postCategory as $category) {
 
-                    if ($uniquePost->getId() == $categoryId) {
+                    if ($category->getId() == $categoryId) {
                         $posts[] = $post;
                     }
                 }
