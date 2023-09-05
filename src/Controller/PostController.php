@@ -12,25 +12,51 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class PostController extends AbstractController {
-
-    /**
-    *
-    * @Route ("/posts", name="app_posts")
-    */
-   public function posts(PostRepository $postRepository, CategoryRepository $categoryRepository)
-   {
-       $posts = $postRepository->findBy([], ['publishedAt' => 'DESC']);
-       $categories =$categoryRepository->findAll();
-       return $this->render('post/posts.html.twig', [
-           'posts' => $posts,
-           'categories' => $categories,
-       ]);
-   }
+class PostController extends AbstractController
+{
 
     /**
      *
-     * @Route ("/post/{id}", name="app_single_post", requirements={"id"="\d+"})
+     * @Route ("/posts", name="app_posts", methods={"GET", "POST"})
+     */
+    public function posts(PostRepository $postRepository, CategoryRepository $categoryRepository, Request $request)
+    {
+
+        $categoryId = $request->request->get('category');
+
+        if (isset($categoryId) && $categoryId != 0) {
+
+            $postsToSort = $postRepository->findAll();
+
+            $posts = [];
+
+            foreach ($postsToSort as $post) {
+
+                $postCategory = $post->getCategory()->getValues();
+
+                foreach ($postCategory as $category) {
+
+                    if ($category->getId() == $categoryId) {
+                        $posts[] = $post;
+                    }
+                }
+            }
+        } else if (!isset($categoryId) || $categoryId == 0) {
+
+            $posts = $postRepository->findBy([], ['publishedAt' => 'DESC']);
+            dump($posts);
+        }
+
+        $categories = $categoryRepository->findAll();
+        return $this->render('post/posts.html.twig', [
+            'posts' => $posts,
+            'categories' => $categories,
+        ]);
+    }
+
+    /**
+     *
+     * @Route ("/post/{id}", name="app_single_post", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function post(PostRepository $postRepository, $id)
     {
@@ -49,7 +75,7 @@ class PostController extends AbstractController {
     public function new(Request $request, PostRepository $postRepository)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        
+
         $post = new Post();
 
         $form = $this->createForm(PostType::class, $post);
@@ -58,8 +84,8 @@ class PostController extends AbstractController {
         // if form is submitted
         if ($form->isSubmitted() && $form->isValid()) {
 
-             /** @var \App\Entity\User $user */
-             $user = $this->getUser();
+            /** @var \App\Entity\User $user */
+            $user = $this->getUser();
             $post->setPublishedAt(new DateTime());
             $post->setAuthor($user);
             $postRepository->add($post, true);
@@ -76,5 +102,4 @@ class PostController extends AbstractController {
             'post' => $post
         ]);
     }
-
 }
