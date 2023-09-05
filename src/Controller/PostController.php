@@ -16,11 +16,20 @@ class PostController extends AbstractController {
 
     /**
     *
-    * @Route ("/posts", name="app_posts")
+    * @Route ("/posts", name="app_posts", methods={"GET", "POST"})
     */
-   public function posts(PostRepository $postRepository, CategoryRepository $categoryRepository)
+   public function posts(PostRepository $postRepository, CategoryRepository $categoryRepository, Request $request)
    {
-       $posts = $postRepository->findBy([], ['publishedAt' => 'DESC']);
+
+    $categoryId = $request->request->get('category');
+
+    if(isset($categoryId) && $categoryId != 0){
+
+        dd($categoryId);
+
+    }
+        $posts = $postRepository->findBy([], ['publishedAt' => 'DESC']);
+   
        $categories =$categoryRepository->findAll();
        return $this->render('post/posts.html.twig', [
            'posts' => $posts,
@@ -30,7 +39,7 @@ class PostController extends AbstractController {
 
     /**
      *
-     * @Route ("/post/{id}", name="app_single_post", requirements={"id"="\d+"})
+     * @Route ("/post/{id}", name="app_single_post", requirements={"id"="\d+"}, methods={"GET"})
      */
     public function post(PostRepository $postRepository, $id)
     {
