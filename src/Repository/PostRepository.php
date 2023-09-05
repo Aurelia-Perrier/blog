@@ -42,17 +42,19 @@ class PostRepository extends ServiceEntityRepository
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */
-//    public function findByExampleField($value): array
+//    public function findPostsByCategory($id): array
 //    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+//          $em = $this->getDoctrine()->getManager();
+
+//     $qb = $em->createQueryBuilder();
+//     $qb->select('p')           
+//         ->from('App\Post', 'p')
+//         ->innerJoin('p.category','cat')
+//         ->where('cat IN (:listCat)')
+//        ->setParameter('listCat', $id);
+
+//     return $qb->getQuery()->getResult();
+//     }
 
 //    public function findOneBySomeField($value): ?Post
 //    {
