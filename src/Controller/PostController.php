@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 use App\Repository\CategoryRepository;
-use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,13 +59,38 @@ class PostController extends AbstractController
 
     /**
      *
-     * @Route ("/post/{id}", name="app_single_post", requirements={"id"="\d+"}, methods={"GET"})
+     * @Route ("/post/{id}", name="app_single_post", requirements={"id"="\d+"}, methods={"GET", "POST"})
+     * 
      */
-    public function post(PostRepository $postRepository, $id)
+    public function post(PostRepository $postRepository, CommentRepository $commentRepository, Request $request, $id)
     {
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        // if form is submitted
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $postToBind = $postRepository->findOneBy(['id' => $id]);
+            $comment->setPost($postToBind);
+            $comment->setPublishedAt(new DateTime());
+            $comment->setIsValidated(false);
+            $comment->setIsRefused(false);
+            $commentRepository->add($comment, true);
+
+            $this->addFlash('success', 'Le commentaire est en ligne ! Merci pour votre contribution ');
+
+            // redirection
+            return $this->redirectToRoute('app_single_post', ['id' => $id], Response::HTTP_SEE_OTHER);
+        }
+
+
         $post = $postRepository->findOneBy(['id' => $id]);
-        return $this->render('post/post.html.twig', [
-            'post' => $post
+        return $this->renderForm('post/post.html.twig', [
+            'post' => $post,
+            'comment' => $comment,
+            'form' => $form
         ]);
     }
 
