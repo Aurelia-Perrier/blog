@@ -25,6 +25,10 @@ class CommentController extends AbstractController
         $submittedToken = $request->request->get('token');
         
         if ($this->isCsrfTokenValid('validate-comment', $submittedToken)) {
+
+            if($comment->isIsRefused() === true){
+                $comment->setIsRefused(false);
+            }
             $comment->setIsValidated(true);
 
 
@@ -48,6 +52,10 @@ class CommentController extends AbstractController
         $submittedToken = $request->request->get('token');
         
         if ($this->isCsrfTokenValid('refuse-comment', $submittedToken)) {
+            
+            if ($comment->isIsValidated() === true){
+                $comment->setIsValidated(false);
+            }
             $comment->setIsRefused(true);
 
             $entityManager->flush($comment);
