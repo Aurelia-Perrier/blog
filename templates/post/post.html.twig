@@ -54,6 +54,7 @@
 										<time pubdate datetime="2022-06-23" title="June 23rd, 2022">{{ comment.publishedAt|date("d/m/Y")}}</time>
 									</p>
 								</div>
+								{% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.email is same as(post.author.email) %}
 								<div class="flex">
 									<form action="{{ path('app_comment_validate',{'id': comment.id})}}" method="post">
 										<button type="submit" class=" w-full block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -72,6 +73,7 @@
 										<input type="hidden" name="token" value="{{ csrf_token('refuse-comment') }}">
 									</form>
 								</div>
+								{% endif %}
 							</footer>
 							<p>{{comment.body}}</p>
 						</article>

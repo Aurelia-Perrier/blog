@@ -19,12 +19,18 @@ class CommentController extends AbstractController
      */
     public function validate(Comment $comment, Request $request, EntityManagerInterface $entityManager )
     {
+        $post = $comment->getPost();
+
+        $this->denyAccessUnlessGranted('comment_validate', $post);
         $submittedToken = $request->request->get('token');
         
         if ($this->isCsrfTokenValid('validate-comment', $submittedToken)) {
+
+            if($comment->isIsRefused() === true){
+                $comment->setIsRefused(false);
+            }
             $comment->setIsValidated(true);
 
-            $post = $comment->getPost();
 
             $entityManager->flush($comment);
 
@@ -41,11 +47,16 @@ class CommentController extends AbstractController
      */
     public function refuse(Comment $comment, Request $request, EntityManagerInterface $entityManager )
     {
+        $post = $comment->getPost();
+        $this->denyAccessUnlessGranted('comment_refuse', $post);
         $submittedToken = $request->request->get('token');
         
         if ($this->isCsrfTokenValid('refuse-comment', $submittedToken)) {
+            
+            if ($comment->isIsValidated() === true){
+                $comment->setIsValidated(false);
+            }
             $comment->setIsRefused(true);
-            $post = $comment->getPost();
 
             $entityManager->flush($comment);
 
