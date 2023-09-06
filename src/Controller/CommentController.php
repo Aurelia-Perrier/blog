@@ -15,7 +15,7 @@ class CommentController extends AbstractController
     /**
      * Undocumented function
      *
-     * @Route ("comment/{id}/validate",name="app_comment_validate", requirements={"id"="\d+"}, methods={"POST"} )
+     * @Route ("{id}/validate",name="app_comment_validate", requirements={"id"="\d+"}, methods={"POST"} )
      */
     public function validate(Comment $comment, Request $request, EntityManagerInterface $entityManager )
     {
