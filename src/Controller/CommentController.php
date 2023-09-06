@@ -34,4 +34,25 @@ class CommentController extends AbstractController
 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @Route ("{id}/refuse",name="app_comment_refuse", requirements={"id"="\d+"}, methods={"POST"} )
+     */
+    public function refuse(Comment $comment, Request $request, EntityManagerInterface $entityManager )
+    {
+        $submittedToken = $request->request->get('token');
+        
+        if ($this->isCsrfTokenValid('refuse-comment', $submittedToken)) {
+            $comment->setIsRefused(true);
+            $post = $comment->getPost();
+
+            $entityManager->flush($comment);
+
+            return $this->redirectToRoute('app_single_post', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
+
+        }
+
+    }
+
 }
