@@ -9,6 +9,12 @@ module.exports = {
     extend: {
       screens: {
         'sm': {'max': '425px'},
+      },
+      colors: {
+        green : '#0C5446',
+        orange: '#FF6700',
+        lightbrown: '#DBD0BD',
+        beige: '#FCFAEF',
       }
     },
   },

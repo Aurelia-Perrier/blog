@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-	<section class="bg-white dark:bg-gray-900 mt-6">
+	<section>
 		<div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
 			<div class="max-w-screen-md mb-8 lg:mb-16">
 				<h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Bienvenue sur notre site</h2>
@@ -11,12 +11,12 @@
 					<div class="border-line">
 						<div class="mb-4">
 						{% for category in post.category %}
-							<a href="#" class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">{{category.name}}</a>
+							<span class="bg-green text-beige text-sm font-medium mr-2 px-2.5 py-0.5 rounded border border-green">{{category.name}}</span>
 						{% endfor %}
 						</div>
 						<h3 class="mb-2 text-xl font-bold dark:text-white">{{ post.title }}</h3>
 						<p class="text-gray-500 dark:text-gray-400">{{post.body|u.truncate(200, '...', false)}}</p>
-						<a href="#" class="inline-flex items-center px-3 py-2 mt-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+						<a href="{{ path('app_single_post', {'id': post.id})}}" class="inline-flex items-center px-3 py-2 mt-4 text-sm font-medium text-center text-beige bg-orange rounded-lg">
 						Read more
 						<svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 10">
 							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

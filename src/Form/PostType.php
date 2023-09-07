@@ -20,12 +20,12 @@ class PostType extends AbstractType
             ->add('title', TextType::class,
             [
                 'label' => 'Titre du post',
-                'attr' => ['class' => 'mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black'],
+                'attr' => ['class' => 'bg-beige mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-green'],
             ])
             ->add('body', TextareaType::class,
             [
                 'label' => 'Contenu du post',
-                'attr' => ['class' => 'mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black']
+                'attr' => ['class' => 'bg-beige mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-green']
             ])
             ->add('category',EntityType::class, 
             [
@@ -35,7 +35,7 @@ class PostType extends AbstractType
                 'expanded' => true,
                 'label' => 'Associez votre article avec au moins une catégorie',
                 'attr' => [
-                    'class' => 'flex justify-between mt-6 focus:ring-blue-500'
+                    'class' => 'flex justify-between my-8 focus:border-green'
                 ],
             ] )
         ;
