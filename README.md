@@ -2,7 +2,7 @@
 
 Ce projet est un petit blog :  on peut y poster des articles ainsi que des commentaires sous les articles. Il y a également un système d'authentification.
 
-## Installtion du projet
+## Installation du projet
 
 Pour installer toutes les dépendances il faut utiliser ``` composer install``` ainsi que ``` npm install```
 
