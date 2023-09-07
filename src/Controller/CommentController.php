@@ -15,7 +15,7 @@ class CommentController extends AbstractController
     /**
      * Undocumented function
      *
-     * @Route ("{id}/validate",name="app_comment_validate", requirements={"id"="\d+"}, methods={"POST"} )
+     * @Route ("comment/{id}/validate",name="app_comment_validate", requirements={"id"="\d+"}, methods={"POST"} )
      */
     public function validate(Comment $comment, Request $request, EntityManagerInterface $entityManager )
     {
@@ -43,7 +43,7 @@ class CommentController extends AbstractController
     /**
      * Undocumented function
      *
-     * @Route ("{id}/refuse",name="app_comment_refuse", requirements={"id"="\d+"}, methods={"POST"} )
+     * @Route ("comment/{id}/refuse",name="app_comment_refuse", requirements={"id"="\d+"}, methods={"POST"} )
      */
     public function refuse(Comment $comment, Request $request, EntityManagerInterface $entityManager )
     {
