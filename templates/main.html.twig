@@ -14,8 +14,8 @@
 							<span class="bg-green text-beige text-sm font-medium mr-2 px-2.5 py-0.5 rounded border border-green">{{category.name}}</span>
 						{% endfor %}
 						</div>
-						<h3 class="mb-2 text-xl font-bold dark:text-white">{{ post.title }}</h3>
-						<p class="text-gray-500 dark:text-gray-400">{{post.body|u.truncate(200, '...', false)}}</p>
+						<h3 class="mb-2 text-xl font-bold dark:text-white">{{ post.title|raw }}</h3>
+						<p class="text-gray-500 dark:text-gray-400">{{post.body|u.truncate(200, '...', false)|raw}}</p>
 						<a href="{{ path('app_single_post', {'id': post.id})}}" class="inline-flex items-center px-3 py-2 mt-4 text-sm font-medium text-center text-beige bg-orange rounded-lg">
 						Read more
 						<svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 10">

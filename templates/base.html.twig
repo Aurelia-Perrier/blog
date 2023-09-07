@@ -20,6 +20,7 @@
 	</head>
 	<body>
 		<header class=" mb-6">
+		{% dump(app.request.get('_route')) %}
 			<nav class="bg-green fixed w-full z-20 top-0 left-0">
 				<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 					<a href="{{ path('app_home')}}" class="flex items-center">
@@ -44,10 +45,10 @@
 								</div>
 								<ul class="py-2" aria-labelledby="user-menu-button">
 									<li>
-										<a href="{{ path("app_new_post")}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Poster un article</a>
+										<a href="{{ path("app_new_post")}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Poster un article</a>
 									</li>
 									<li>
-										<a href="{{ path('app_logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Déconnexion</a>
+										<a href="{{ path('app_logout')}}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Déconnexion</a>
 									</li>
 								</ul>
 							</div>
@@ -69,13 +70,14 @@
 					<div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
 						<ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
 							<li>
-								<a href="{{ path('app_home')}}" class="block py-2 pl-3 pr-4 text-beige rounded md:bg-transparent md:p-0">Home</a>
+								<a href="{{ path('app_home')}}" {% if app.request.get('_route') == 'app_home' %} class="block py-2 pl-3 pr-4 text-beige rounded md:bg-transparent md:p-0 underline underline-offset-8" {% else %} class="block py-2 pl-3 pr-4 text-beige rounded md:bg-transparent md:p-0"{% endif %}>
+								Home</a>
 							</li>
 							<li>
-								<a href="{{ path('app_posts')}}" class="block py-2 pl-3 pr-4 text-beige rounded md:bg-transparent md:p-0">Nos articles</a>
+								<a href="{{ path('app_posts')}}" {% if app.request.get('_route') == 'app_posts' %} class="block py-2 pl-3 pr-4 text-beige rounded md:bg-transparent md:p-0 underline underline-offset-8" {% else %} class="block py-2 pl-3 pr-4 text-beige rounded md:bg-transparent md:p-0"{% endif %}>Nos articles</a>
 							</li>
 							<li>
-								<a href="{{ path('app_contact')}}" class="block py-2 pl-3 pr-4 text-beige rounded md:bg-transparent md:p-0">Contact</a>
+								<a href="{{ path('app_contact')}}"{% if app.request.get('_route') == 'app_contact' %} class="block py-2 pl-3 pr-4 text-beige rounded md:bg-transparent md:p-0 underline underline-offset-8" {% else %} class="block py-2 pl-3 pr-4 text-beige rounded md:bg-transparent md:p-0"{% endif %}>Contact</a>
 							</li>
 						</ul>
 					</div>
