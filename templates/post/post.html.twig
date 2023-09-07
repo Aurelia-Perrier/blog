@@ -14,19 +14,19 @@
 							{% endif %}
 
 							<div>
-								<a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">{{post.author.firstname}}
-									{{post.author.lastname}}</a>
+								<a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">{{post.author.firstname|raw}}
+									{{post.author.lastname|raw}}</a>
 								<p class="text-base font-light text-gray-500 dark:text-gray-400">
 									<time pubdate datetime="2022-02-08" title="February 8th, 2022">{{ post.publishedAt|date("d/m/Y")}}</time>
 								</p>
 							</div>
 						</div>
 					</address>
-					<h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{post.title}}</h1>
+					<h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{post.title|raw}}</h1>
 				</header>
 				<div class="my-4">
 					{% for category in post.category %}
-						<span class="bg-green text-beige text-sm font-medium mr-2 px-2.5 py-0.5 rounded border border-green">{{category.name}}</span>
+						<span class="bg-green text-beige text-sm font-medium mr-2 px-2.5 py-0.5 rounded border border-green">{{category.name|raw}}</span>
 					{% endfor %}
 				</div>
 				<p>{{post.body}}</p>
@@ -46,7 +46,7 @@
 						<article {% if (comment.isValidated is same as (true))%} class="validate" {% elseif ( comment.isRefused is same as (true))%} class="refuse" {% else %} class="p-6" {% endif %}>
 							<footer class="flex justify-between items-center mb-2">
 								<div class="flex items-center">
-									<p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">{{comment.username|upper }}</p>
+									<p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">{{comment.username|upper|raw }}</p>
 									<p class="text-sm text-gray-600 dark:text-gray-400">
 										<time pubdate datetime="2022-06-23" title="June 23rd, 2022">{{ comment.publishedAt|date("d/m/Y")}}</time>
 									</p>
@@ -72,7 +72,7 @@
 									</div>
 								{% endif %}
 							</footer>
-							<p>{{comment.body}}</p>
+							<p>{{comment.body|raw}}</p>
 						</article>
 					{% endfor %}
 				</section>
