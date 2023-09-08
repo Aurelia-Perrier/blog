@@ -19,16 +19,22 @@ class PostController extends AbstractController
 {
 
     /**
+     * Affiche tous les posts
+     * Tri les posts en fonction de leurs catégories
      *
      * @Route ("/posts", name="app_posts", methods={"GET", "POST"})
      */
     public function posts(PostRepository $postRepository, CategoryRepository $categoryRepository, Request $request)
     {
 
+        // on récupère l'id transmis lors de la souission du formulaire de tri
         $categoryId = $request->request->get('category');
 
+        // si categoryId existe et qu'il est différent de 0
         if (isset($categoryId) && $categoryId != 0) {
 
+            // on regarde sur chaque post s'ils possèdent la catégorie qui est demandé grâce à l'id envoyé dans categoryId
+            // chaque post ayant la categorie correspondante : on le met dans un nouveau tableau
             $postsToSort = $postRepository->findAll();
 
             $posts = [];
@@ -44,12 +50,14 @@ class PostController extends AbstractController
                     }
                 }
             }
+            // si categoryId n'existe pas ou qu'il est égal à 0
         } else if (!isset($categoryId) || $categoryId == 0) {
 
+            // on recupère tous les posts
             $posts = $postRepository->findBy([], ['publishedAt' => 'DESC']);
-            dump($posts);
         }
 
+        // on envoie les posts, les categories et le formulaire dans le template
         $categories = $categoryRepository->findAll();
         return $this->render('post/posts.html.twig', [
             'posts' => $posts,
@@ -59,26 +67,35 @@ class PostController extends AbstractController
 
     /**
      *
+     * Affiche un post
+     * Traitement du formulaire pour l'ajout d'un commentaire
+     * 
      * @Route ("/post/{id}", name="app_single_post", requirements={"id"="\d+"}, methods={"GET", "POST"})
      * 
      */
     public function post(PostRepository $postRepository, CommentRepository $commentRepository, Request $request, $id)
     {
+        // création d'une instance de Comment
         $comment = new Comment();
 
+        // création du formulaire
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        // if form is submitted
+        // si le formulaire est soumit
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // on set toutes les valeurs nécessaires et on lie le commentaire au post
             $postToBind = $postRepository->findOneBy(['id' => $id]);
             $comment->setPost($postToBind);
             $comment->setPublishedAt(new DateTime());
             $comment->setIsValidated(false);
             $comment->setIsRefused(false);
+
+            // on envoit le nouveau commentaire en base de données
             $commentRepository->add($comment, true);
 
+            //un message confirmant la création du commentaire
             $this->addFlash('success', 'Le commentaire est en ligne ! Merci pour votre contribution ');
 
             // redirection
@@ -86,38 +103,42 @@ class PostController extends AbstractController
         }
 
 
+        // affichage du post et du formulaire
         $post = $postRepository->findOneBy(['id' => $id]);
         return $this->renderForm('post/post.html.twig', [
             'post' => $post,
-            'comment' => $comment,
             'form' => $form
         ]);
     }
 
     /**
-     * Undocumented function
+     * Affiche et traitement du formulaire d'ajout d'un post
      *
-     * @param Request $request
      * @Route ("/post/new", name="app_new_post", methods={"GET", "POST"})
      */
     public function new(Request $request, PostRepository $postRepository)
     {
+        // refus si on n'est pas authentifié
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        //création d'une nouvelle instance de Post
         $post = new Post();
 
+        //création d'un formulaire
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
-        // if form is submitted
+        // si le formulaire est soumit
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // set des champs et association à l'utilisateur connecté
             /** @var \App\Entity\User $user */
             $user = $this->getUser();
             $post->setPublishedAt(new DateTime());
             $post->setAuthor($user);
             $postRepository->add($post, true);
 
+            // message de succès
             $this->addFlash('success', 'Le poste est en ligne ! Merci pour votre contribution ');
 
 
