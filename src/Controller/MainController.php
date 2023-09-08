@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Post;
 use App\Repository\PostRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MainController extends AbstractController
 {
     /**
-     *
+     *Page d'accueil
+
      * @Route ("/", name="app_home")
      */
     public function index(PostRepository $postRepository)
@@ -22,7 +22,8 @@ class MainController extends AbstractController
     }
 
     /**
-     *
+     *Page de contact
+
      * @Route ("/contact", name="app_contact")
      */
     public function contatc()
